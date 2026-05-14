@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="JSP Consulting — 20 years of IT excellence. Microsoft 365, Azure, cloud infrastructure, back-office systems, security, and AI automation for Canadian businesses.">
+<title>JSP Consulting | IT, Cloud & AI Consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #141414;
+    --navy-mid: #1e1e1e;
+    --blue: #2a2a2a;
+    --blue-bright: #3a3a3a;
+    --accent: #b0b8c1;
+    --accent-bright: #d4dce6;
+    --accent-glow: rgba(176,184,193,0.12);
+    --silver: #a0a8b0;
+    --light: #d0d8e0;
+    --white: #eef0f2;
+    --text-muted: #707880;
+    --grid-line: rgba(180,188,196,0.05);
+    --border: rgba(176,184,193,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--light);
+    line-height: 1.7;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Radial glow */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 600px;
+    background: radial-gradient(ellipse at center, rgba(176,184,193,0.07) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  * { position: relative; z-index: 1; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6%;
+    height: 70px;
+    background: rgba(10,22,40,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .nav-logo img {
+    height: 44px;
+    width: auto;
+    filter: brightness(1.05);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--silver);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  .nav-cta {
+    background: var(--accent);
+    color: #141414 !important;
+    padding: 0.45rem 1.2rem;
+    border-radius: 4px;
+    font-weight: 600 !important;
+    transition: background 0.2s, transform 0.15s !important;
+  }
+
+  .nav-cta:hover { background: var(--accent-bright) !important; transform: translateY(-1px); color: #141414 !important; }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--silver); border-radius: 2px; transition: 0.3s; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 6% 80px;
+  }
+
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 0.8rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    background: rgba(59,158,255,0.07);
+  }
+
+  .hero-badge::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    max-width: 820px;
+  }
+
+  .hero h1 .accent { color: var(--accent-bright); }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--silver);
+    max-width: 560px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: #141414;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.85rem 2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover { background: var(--accent-bright); transform: translateY(-2px); }
+
+  .btn-outline {
+    display: inline-block;
+    border: 1px solid var(--border);
+    color: var(--silver);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.85rem 2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .stat-item { text-align: left; }
+
+  .stat-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .stat-number span { color: var(--accent-bright); }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* SECTION LAYOUT */
+  section { padding: 100px 6%; }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-tag {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin-bottom: 1rem;
+  }
+
+  .section-sub {
+    color: var(--silver);
+    font-size: 1.05rem;
+    max-width: 540px;
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 3.5rem;
+  }
+
+  /* SERVICES */
+  #services { background: rgba(17,34,64,0.4); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .service-card {
+    background: var(--navy-mid);
+    padding: 2rem 2rem 2.5rem;
+    transition: background 0.3s;
+  }
+
+  .service-card:hover { background: rgba(26,74,138,0.3); }
+
+  .service-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    background: var(--accent-glow);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+    font-size: 1.3rem;
+  }
+
+  .service-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  .service-card p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+  }
+
+  .service-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 1.25rem;
+  }
+
+  .tag {
+    font-size: 0.72rem;
+    color: var(--accent);
+    background: var(--accent-glow);
+    border: 1px solid rgba(59,158,255,0.25);
+    padding: 3px 10px;
+    border-radius: 100px;
+    letter-spacing: 0.04em;
+  }
+
+  /* WHY JSP */
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .why-list { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .why-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .why-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent);
+    background: var(--accent-glow);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 8px;
+    flex-shrink: 0;
+    margin-top: 3px;
+    letter-spacing: 0.06em;
+  }
+
+  .why-item h4 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    color: var(--white);
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .why-item p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+
+  .why-panel {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--navy-mid);
+    padding: 2rem;
+  }
+
+  .why-panel-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .cert-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cert-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .cert-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .cert-row span { font-size: 0.9rem; color: var(--silver); }
+
+  /* PROCESS */
+  #process { background: rgba(17,34,64,0.4); }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--border);
+  }
+
+  .process-step {
+    background: var(--navy-mid);
+    padding: 2.5rem 2rem;
+  }
+
+  .step-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: rgba(59,158,255,0.15);
+    line-height: 1;
+    margin-bottom: 1rem;
+    letter-spacing: -0.04em;
+  }
+
+  .process-step h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.6rem;
+  }
+
+  .process-step p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+
+  /* CONTACT */
+  #contact { background: rgba(10,22,40,0.6); }
+
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .contact-info h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin-bottom: 1rem;
+  }
+
+  .contact-info p { color: var(--silver); font-weight: 300; line-height: 1.8; margin-bottom: 2rem; }
+
+  .contact-detail {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--silver);
+    margin-bottom: 0.75rem;
+  }
+
+  .contact-detail a { color: var(--silver); text-decoration: none; transition: color 0.2s; }
+  .contact-detail a:hover { color: var(--accent); }
+
+  .contact-detail-icon {
+    width: 30px; height: 30px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--accent-glow);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  /* FORM */
+  .contact-form {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--navy-mid);
+    padding: 2.5rem;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-field { margin-bottom: 1rem; }
+
+  .form-field label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--silver);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    width: 100%;
+    background: rgba(10,22,40,0.8);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  .form-field input::placeholder,
+  .form-field textarea::placeholder { color: var(--text-muted); }
+
+  .form-field input:focus,
+  .form-field select:focus,
+  .form-field textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(59,158,255,0.1);
+  }
+
+  .form-field select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238da8c8' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; }
+
+  .form-field textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
+
+  .form-submit {
+    width: 100%;
+    background: var(--accent);
+    color: var(--navy);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.9rem 2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    margin-top: 0.5rem;
+    letter-spacing: 0.01em;
+  }
+
+  .form-submit:hover { background: var(--accent-bright); transform: translateY(-1px); }
+
+  .form-note {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 0.75rem;
+  }
+
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+    color: var(--accent);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  .footer-logo img { height: 36px; width: auto; opacity: 0.85; }
+
+  footer p { font-size: 0.82rem; color: var(--text-muted); }
+
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a { font-size: 0.82rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--accent); }
+
+  /* MOBILE NAV */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 70px 0 0 0;
+    background: rgba(10,22,40,0.98);
+    backdrop-filter: blur(16px);
+    z-index: 999;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .mobile-menu.open { display: flex; }
+
+  .mobile-menu a {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--silver);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .mobile-menu a:hover { color: var(--accent); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .why-grid { grid-template-columns: 1fr; }
+    .why-panel { order: -1; }
+    .process-steps { grid-template-columns: 1fr; }
+    .contact-wrap { grid-template-columns: 1fr; gap: 3rem; }
+    .form-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; align-items: center; }
+  }
+
+  @media (max-width: 600px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo"><img src="banner.jpg" alt="JSP Consulting"></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why JSP</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact" class="nav-cta">Book a Call</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#why" onclick="closeMobile()">Why JSP</a>
+  <a href="#process" onclick="closeMobile()">Process</a>
+  <a href="#contact" onclick="closeMobile()">Book a Call</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-badge">20 Years of IT Excellence · Canada</div>
+    <div style="margin-bottom:2rem;">
+      <img src="banner.jpg" alt="JSP Consulting" style="height:110px;width:auto;filter:drop-shadow(0 4px 24px rgba(176,184,193,0.18));">
+    </div>
+    <h1>
+      Technology that<br>
+      <span class="accent">works for you,</span><br>
+      not against you.
+    </h1>
+    <p class="hero-sub">
+      From Microsoft 365 and Azure to AI automation and back-office systems — JSP Consulting transforms how Canadian businesses operate, compete, and grow.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Book a Free Consultation</a>
+      <a href="#services" class="btn-outline">Explore Services</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-number">20<span>+</span></div>
+        <div class="stat-label">Years experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">100<span>+</span></div>
+        <div class="stat-label">Projects delivered</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">6</div>
+        <div class="stat-label">Core services</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number"><span>🍁</span></div>
+        <div class="stat-label">Canadian based</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-tag">What we do</div>
+    <h2 class="section-title">End-to-end technology consulting</h2>
+    <p class="section-sub">Every service we offer is built on 20 years of real-world implementation experience — not theory.</p>
+
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon">☁️</div>
+        <h3>Azure & Cloud Infrastructure</h3>
+        <p>Design, deploy, and manage scalable cloud environments. From greenfield Azure builds to hybrid migrations — secure, resilient, and cost-effective.</p>
+        <div class="service-tags">
+          <span class="tag">Azure</span>
+          <span class="tag">Hybrid Cloud</span>
+          <span class="tag">IaaS / PaaS</span>
+          <span class="tag">Disaster Recovery</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">📧</div>
+        <h3>Microsoft 365 / O365</h3>
+        <p>Full M365 deployment, migration, and optimization. Teams, SharePoint, Exchange, Intune, and Entra ID — configured the right way from day one.</p>
+        <div class="service-tags">
+          <span class="tag">Teams</span>
+          <span class="tag">SharePoint</span>
+          <span class="tag">Exchange Online</span>
+          <span class="tag">Entra ID</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🔒</div>
+        <h3>IT Security & Assessments</h3>
+        <p>Comprehensive security audits, risk assessments, and remediation planning. Zero-trust frameworks, endpoint protection, and compliance readiness.</p>
+        <div class="service-tags">
+          <span class="tag">Zero Trust</span>
+          <span class="tag">Risk Assessment</span>
+          <span class="tag">Compliance</span>
+          <span class="tag">Endpoint Security</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">💻</div>
+        <h3>Website & Back Office Creation</h3>
+        <p>Custom websites, intranets, and back-office systems tailored to your workflows. From initial build to GitHub-managed deployments that your team can maintain.</p>
+        <div class="service-tags">
+          <span class="tag">Web Design</span>
+          <span class="tag">Intranet</span>
+          <span class="tag">GitHub Pages</span>
+          <span class="tag">Back Office</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">💰</div>
+        <h3>Cloud Cost Optimization</h3>
+        <p>Stop overpaying for cloud. We audit your Azure and M365 spend, eliminate waste, right-size resources, and build governance that keeps costs under control.</p>
+        <div class="service-tags">
+          <span class="tag">FinOps</span>
+          <span class="tag">Azure Cost Mgmt</span>
+          <span class="tag">Licensing Review</span>
+          <span class="tag">Governance</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🤖</div>
+        <h3>AI & Automation</h3>
+        <p>Business process automation, AI-powered copilots, and intelligent workflows. We deploy AI that delivers measurable ROI — not just demos.</p>
+        <div class="service-tags">
+          <span class="tag">Copilot for M365</span>
+          <span class="tag">Power Automate</span>
+          <span class="tag">AI Chatbots</span>
+          <span class="tag">Workflow Automation</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY JSP -->
+<section id="why">
+  <div class="section-inner">
+    <div class="why-grid">
+      <div>
+        <div class="section-tag">Why JSP Consulting</div>
+        <h2 class="section-title">Experience you can measure in outcomes</h2>
+        <p class="section-sub">We're not a vendor. We're an extension of your team — accountable for results.</p>
+        <div class="why-list">
+          <div class="why-item">
+            <div class="why-num">01</div>
+            <div>
+              <h4>Two decades of real-world delivery</h4>
+              <p>20 years of enterprise implementations means we've seen what breaks, what scales, and what actually gets adopted by users.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-num">02</div>
+            <div>
+              <h4>Microsoft-deep expertise</h4>
+              <p>Azure and M365 aren't just tools we use — they're our native environment. We know every lever available to optimize your investment.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-num">03</div>
+            <div>
+              <h4>Full-stack: cloud to website to AI</h4>
+              <p>One consulting partner across your entire technology stack. No handoffs, no gaps, no finger-pointing between vendors.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-num">04</div>
+            <div>
+              <h4>Canadian-based, no-fluff delivery</h4>
+              <p>We work with Canadian businesses who need practical, budget-conscious solutions — not enterprise bloat priced for Fortune 500.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="why-panel">
+        <div class="why-panel-title">Expertise & Stack</div>
+        <div class="cert-row"><div class="cert-dot"></div><span>Microsoft Azure — Infrastructure & Architecture</span></div>
+        <div class="cert-row"><div class="cert-dot"></div><span>Microsoft 365 & Entra ID Administration</span></div>
+        <div class="cert-row"><div class="cert-dot"></div><span>SharePoint Online & Teams Deployment</span></div>
+        <div class="cert-row"><div class="cert-dot"></div><span>Copilot for Microsoft 365</span></div>
+        <div class="cert-row"><div class="cert-dot"></div><span>Power Platform & Power Automate</span></div>
+        <div class="cert-row"><div class="cert-dot"></div><span>IT Security & Compliance Frameworks</span></div>
+        <div class="cert-row"><div class="cert-dot"></div><span>Cloud Cost Management & FinOps</span></div>
+        <div class="cert-row"><div class="cert-dot"></div><span>GitHub · HTML · Web & Back Office Systems</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-inner">
+    <div class="section-tag">How we work</div>
+    <h2 class="section-title">Simple. Structured. Accountable.</h2>
+    <p class="section-sub">Every engagement follows the same disciplined process — so you always know where things stand.</p>
+
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-num">01</div>
+        <h3>Discovery & Assessment</h3>
+        <p>We audit your current environment, workflows, and pain points. No assumptions — just facts. You get a clear picture of what's working and what isn't.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">02</div>
+        <h3>Design & Implementation</h3>
+        <p>We architect a solution tailored to your business, then deploy it with precision. Security, scalability, and user adoption baked in from day one.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">03</div>
+        <h3>Optimize & Sustain</h3>
+        <p>Post-launch monitoring, cost reviews, and continuous improvement. We stick around to make sure your investment keeps delivering — and your team stays empowered.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <div class="section-tag">Get in touch</div>
+        <h2>Let's talk about your technology.</h2>
+        <p>Book a free 30-minute consultation. No sales pitch — just a straight conversation about your challenges and what's possible.</p>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">✉</div>
+          <a href="mailto:info@jspconsulting.ca">info@jspconsulting.ca</a>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">🌐</div>
+          <span>jspconsulting.ca</span>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">🍁</div>
+          <span>Canada — serving clients coast to coast</span>
+        </div>
+      </div>
+
+      <div class="contact-form" id="contactForm">
+        <div class="form-grid">
+          <div class="form-field">
+            <label>First Name</label>
+            <input type="text" placeholder="Jason" id="fname">
+          </div>
+          <div class="form-field">
+            <label>Last Name</label>
+            <input type="text" placeholder="Smith" id="lname">
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Email</label>
+          <input type="email" placeholder="you@company.com" id="email">
+        </div>
+        <div class="form-field">
+          <label>Company</label>
+          <input type="text" placeholder="Your company name" id="company">
+        </div>
+        <div class="form-field">
+          <label>I need help with</label>
+          <select id="service">
+            <option value="" disabled selected>Select a service area</option>
+            <option>Azure & Cloud Infrastructure</option>
+            <option>Microsoft 365 / O365</option>
+            <option>IT Security & Assessments</option>
+            <option>Website & Back Office</option>
+            <option>Cloud Cost Optimization</option>
+            <option>AI & Automation</option>
+            <option>Something else</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Message</label>
+          <textarea placeholder="Tell us a bit about your situation and what you're trying to solve..." id="message"></textarea>
+        </div>
+        <button class="form-submit" id="submitBtn" onclick="handleSubmit()">Send Message →</button>
+        <p class="form-note">We respond within one business day.</p>
+        <div class="form-success" id="formSuccess">
+          ✓ Message received! We'll be in touch within one business day.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo"><img src="banner.jpg" alt="JSP Consulting"></a>
+  <p>© 2026 JSP Consulting · IT, Cloud & AI Consulting · Canada</p>
+  <ul class="footer-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="mailto:info@jspconsulting.ca">Email</a></li>
+  </ul>
+</footer>
+
+<script>
+  // Mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  function closeMobile() { mobileMenu.classList.remove('open'); }
+
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').style.background =
+      window.scrollY > 40 ? 'rgba(10,22,40,0.97)' : 'rgba(10,22,40,0.85)';
+  });
+
+  // Form handler — Netlify-compatible + fallback mailto
+  function handleSubmit() {
+    const fname = document.getElementById('fname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const service = document.getElementById('service').value;
+    const message = document.getElementById('message').value.trim();
+
+    if (!fname || !email || !message) {
+      alert('Please fill in your name, email, and message.');
+      return;
+    }
+
+    // Netlify Forms: the form will submit if hosted on Netlify with data-netlify="true"
+    // For GitHub Pages, we use a mailto fallback
+    const lname = document.getElementById('lname').value.trim();
+    const company = document.getElementById('company').value.trim();
+    const subject = encodeURIComponent('JSP Consulting Inquiry: ' + (service || 'General'));
+    const body = encodeURIComponent(
+      'Name: ' + fname + ' ' + lname + '\n' +
+      'Email: ' + email + '\n' +
+      'Company: ' + company + '\n' +
+      'Service: ' + service + '\n\n' +
+      'Message:\n' + message
+    );
+    window.location.href = 'mailto:info@jspconsulting.ca?subject=' + subject + '&body=' + body;
+
+    document.getElementById('submitBtn').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
